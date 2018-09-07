@@ -1,0 +1,49 @@
+{% extends 'dashboard/dash-window.html' %}
+{% block dash %}
+
+<h1>Clients</h1>
+<a href="#" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddClientModal">Add New Client</a>
+
+<table class="table table-striped mt-1">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>State</th>
+            <th>Manage</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in current_user.clients %}
+        <tr>
+            <th scope="row">{{ c.id }}</th>
+            <td>{{ c.client_name }}</td>
+            <td>{{c.email}}</td>
+            <td>{{c.phone}}</td>
+            <td>{{c.state}}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="{{url_for('main.singleClient', client_id=c.id ) }}">View</a>
+                <a class="btn btn-info btn-sm" href="#">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal" id="AddClientModal" tabindex="-1" role="dialog" aria-labelledby="addClientModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addClientModalLabel">Add New Client</h5>
+            </div>
+
+            {% include 'dashboard/dash-add-client.html' %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

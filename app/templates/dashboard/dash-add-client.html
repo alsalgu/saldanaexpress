@@ -1,0 +1,48 @@
+<div class="modal-body">
+    <form method="POST">
+          <label class="sr-only" for="client-name">Client Company Name</label>
+          <span class="mb-2">Company Name:</span>
+          <input type="text" class="form-control mb-2" id="client-name" name="client-name" placeholder="Client Company Name">
+
+          <label class="sr-only" for="client-email">Client Company Email</label>
+          <span class="mb-2">Email:</span>
+          <input type="text" class="form-control mb-2" id="client-email" name="client-email" placeholder="client@company.com">
+
+          <label class="sr-only" for="phone-number">Phone Number</label>
+          <label class="sr-only" for="fax-number">Street Address</label>
+          <span class="mb-2">Phone, Fax:</span>
+          <div class="input-group mb-2">
+                <input type="text" class="form-control" id="phone-number" name="phone-number" placeholder="(555) 555-5555">
+                <input type="text" class="form-control" id="fax-number" name="fax-number" placeholder="(555) 867-5309">
+          </div>
+
+          <label class="sr-only" for="street_number">Street Number</label>
+          <label class="sr-only" for="route">Street Address</label>
+          <span class="mb-2">Street Address:</span>
+          <div class="input-group mb-2">
+                <input type="text" class="form-control col-3" id="street_number" name="street_number" placeholder="123">
+                <input type="text" class="form-control" id="route" name="route" placeholder="Main Street">
+          </div>
+
+          <label class="sr-only" for="locality">City</label>
+          <label class="sr-only" for="administrative_area_level_1">State</label>
+          <span class="mb-2">City, State:</span>
+          <div class="input-group mb-2">
+                <input type="text" class="form-control" id="locality" name="locality" placeholder="Fakesville">
+                <input type="text" class="form-control col-3" id="administrative_area_level_1" name="administrative_area_level_1" placeholder="TX"
+                      maxlength="2">
+          </div>
+
+          <span class="mb-2">Zip Code:</span>
+          <label class="sr-only" for="postal_code">Zip Code</label>
+          <label class="sr-only" for="country">Country</label>
+          <input type="text" class="form-control col-3 mb-2" id="postal_code" name="postal_code" placeholder="00000">
+          <span class="mb-2">Country:</span>
+          <input type="text" class="form-control col-4" id="country" name="country" placeholder="United States">
+
+          <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <input type="submit" value="Accept" class="btn btn-primary" />
+          </div>
+    </form>
+</div>

@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "/home/al/anaconda3/envs/trucking/bin/python",
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"]
+}
+

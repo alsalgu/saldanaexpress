@@ -1,0 +1,16 @@
+{% extends 'dashboard/dash-window.html' %}
+{% block dash %}
+
+<h1>{{ current_client.client_name}}</h1>
+<p>{{current_client.email}}</p>
+<p>{{current_client.phone}}</p>
+<p>{{current_client.fax}}</p>
+<p>{{current_client.address}}</p>
+<p>{{current_client.city}}</p>
+<p>{{current_client.state}}</p>
+<p>{{current_client.zipcode}}</p>
+<p>{{current_client.country}}</p>
+
+
+
+{% endblock %}

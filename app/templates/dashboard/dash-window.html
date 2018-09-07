@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex">
+    {% include 'dashboard/dash-sidebar.html' %}
+
+    <div class="container-fluid">
+        {% block dash %}{% endblock dash %}
+    </div>
+</div>
+
+{% endblock %}
