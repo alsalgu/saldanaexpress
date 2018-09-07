@@ -32,7 +32,10 @@ def clients():
                             zipcode = request.form['postal_code'],
                             state = request.form['administrative_area_level_1'],
                             country = request.form['country'],
-                            user_id = current_user.id)
+                            user_id = current_user.id,
+                            mc_number = request.form['mc-number'],
+                            dot_number = request.form['dot-number'],
+                            quickpay = request.form['quickpayCheck'])
         db.session.add(newClient)
         flash('Added New Client')
         db.session.commit()

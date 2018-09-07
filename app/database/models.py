@@ -36,10 +36,13 @@ class Client(db.Model):
     phone = db.Column(db.String(120))
     fax = db.Column(db.String(120))
     address = db.Column(db.String(140))
-    zipcode = db.Column(db.Integer())
+    zipcode = db.Column(db.String(10))
     city = db.Column(db.String(64))
     state = db.Column(db.String(2))
     country = db.Column(db.String(64))
+    mc_number = db.Column(db.String(20))
+    dot_number = db.Column(db.String(20))
+    quickpay = db.Column(db.String(1))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 @login.user_loader

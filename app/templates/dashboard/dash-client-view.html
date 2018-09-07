@@ -12,7 +12,25 @@
                 <li class="list-inline-item">{{current_client.city}}, {{current_client.state}}</li>
                 <li class="list-inline-item"><span class="mr-2">{{current_client.zipcode}}</span>{{current_client.country}}</li>
             </ul>
-            <hr/>
+            <ul class="list-inline m-0">
+                <li class="list-inline-item">
+                    <span class="font-weight-bold">MC#: </span>
+                    {{current_client.mc_number}}
+                </li>
+                <li class="list-inline-item">
+                        <span class="font-weight-bold">DOT#: </span>
+                        {{current_client.dot_number}}</li>
+                {% if current_client.quickpay == 1 %}
+                <li class="list-inline-item text-success">
+                        Quickpay Available
+                </li>
+                {% else %}
+                <li class="list-inline-item text-danger">
+                        Quickpay Not Available
+                </li>
+                {% endif %}
+            </ul>
+            <hr />
         </div>
     </div>
     <div>
