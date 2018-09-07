@@ -40,8 +40,8 @@ def clients():
     else:
         return render_template('dashboard/dash-clients.html')
 
-@bp.route('/dashboard/clients/<int:client_id>')
+@bp.route('/dashboard/clients/<int:client_id>', methods=['GET', 'POST'])
 @login_required
 def singleClient(client_id):
-    current_client = Client.query.filter_by(id=client_id).first()
+    current_client = Client.query.filter_by(id=client_id, user_id=current_user.id).first()
     return render_template('dashboard/dash-client-view.html', current_client=current_client)
