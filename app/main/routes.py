@@ -3,7 +3,7 @@ from flask import request
 from app import db
 from app.main import bp
 from flask_login import current_user, login_user, logout_user, login_required
-from app.database.models import User, Client
+from app.database.models import User, Client, Quickpay
 from werkzeug.urls import url_parse
 
 @bp.route('/')
@@ -47,4 +47,5 @@ def clients():
 @login_required
 def singleClient(client_id):
     current_client = Client.query.filter_by(id=client_id, user_id=current_user.id).first()
-    return render_template('dashboard/dash-client-view.html', current_client=current_client)
+    current_client_quickpay = Quickpay.query.filter_by(client_id = client_id).first()
+    return render_template('dashboard/dash-client-view.html', current_client=current_client, current_client_quickpay = current_client_quickpay)

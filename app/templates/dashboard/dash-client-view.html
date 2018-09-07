@@ -2,7 +2,7 @@
 {% block dash %}
 
 <div class="border rounded p-3">
-    <div class="text-center">
+    <div class="text-center" id="client-info">
         <h2 class="m-0">{{ current_client.client_name }}</h2>
         <div>
             <ul class="list-inline m-0">
@@ -33,7 +33,7 @@
             <hr />
         </div>
     </div>
-    <div>
+    <div id="client-contact"> 
         <div>
             <ul class="list-inline d-flex justify-content-around">
                 <li class="list-inline-item">
@@ -50,6 +50,22 @@
                 </li>
             </ul>
         </div>
+    {% if current_client.quickpay == 1 %}
+    <div id="quickpay-info">
+        {% if current_client_quickpay is none %}
+        QuickPay Not Set Up
+        {% else %}
+        QuickPay Info
+        {% endif %}
+    </div>
+    {% endif %}
+    </div>
+    <div id="client-manage-buttons">
+        <div class="btn btn-primary">Edit Client Info</div>
+        {% if current_client.quickpay == 1 %}
+        <div class="btn btn-primary">Edit Quickpay Info</div>
+        {% endif %}
+        <div class="btn btn-danger">Delete Client</div>
 
     </div>
 </div>

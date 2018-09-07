@@ -44,6 +44,15 @@ class Client(db.Model):
     dot_number = db.Column(db.String(20))
     quickpay = db.Column(db.String(1))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    quickpay_info = db.relationship('Quickpay', backref='client', lazy="dynamic")
+
+class Quickpay(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
+    pay_percentage = db.Column(db.String(5))
+    send_to = db.Column(db.String(120))
+    send_to_type = db.Column(db.String(20))
+
 
 @login.user_loader
 def load_user(id):
