@@ -48,4 +48,24 @@ def clients():
 def singleClient(client_id):
     current_client = Client.query.filter_by(id=client_id, user_id=current_user.id).first()
     current_client_quickpay = Quickpay.query.filter_by(client_id = client_id).first()
-    return render_template('dashboard/dash-client-view.html', current_client=current_client, current_client_quickpay = current_client_quickpay)
+    if current_client_quickpay is None and request.method == "POST":
+        newQuickpay = Quickpay(pay_percentage = request.form['qp-percentage'],
+                                send_to = request.form['send-to'],
+                                send_to_type = request.form['send-to-type'],
+                                client_id = current_client.id)
+        db.session.add(newQuickpay)
+        flash('New Quickpay Info')
+        db.session.commit()
+        return render_template('dashboard/dash-client-view.html', current_client=current_client, current_client_quickpay = current_client_quickpay)
+    elif request.method == "POST":
+        if request.form['qp-percentage']:
+            current_client_quickpay.pay_percentage = request.form['qp-percentage']
+        if request.form['send-to']:
+            current_client_quickpay.send_to = request.form['send-to']
+        if request.form['send-to-type']:
+            current_client_quickpay.send_to_type = request.form['send-to-type']
+        db.session.add(current_client_quickpay)
+        flash('Quickpay Updated')
+        db.session.commit()
+    else:
+        return render_template('dashboard/dash-client-view.html', current_client=current_client, current_client_quickpay = current_client_quickpay)

@@ -1,0 +1,22 @@
+<div class="modal-body">
+    <form method="POST">
+        <label class="sr-only" for="qp-percentage">Pay Percentage</label>
+        <span class="mb-2">Pay Percentage:</span>
+        <input type="text" class="form-control mb-2" id="qp-percentage" name="qp-percentage" placeholder="5">
+
+        <span class="mb-2">Send To:</span>
+        <input type="text" class="form-control mb-2" id="send-to" name="send-to" placeholder="pay@payme.now">
+
+        <span class="mb-2">Send-To Type:</span><br/>
+        <select id="send-to-type" name="send-to-type">
+            <option>Address</option>
+            <option>Email</option>
+            <option>Fax</option>
+        </select>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <input type="submit" value="Accept" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

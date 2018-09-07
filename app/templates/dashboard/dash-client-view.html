@@ -18,22 +18,22 @@
                     {{current_client.mc_number}}
                 </li>
                 <li class="list-inline-item">
-                        <span class="font-weight-bold">DOT#: </span>
-                        {{current_client.dot_number}}</li>
+                    <span class="font-weight-bold">DOT#: </span>
+                    {{current_client.dot_number}}</li>
                 {% if current_client.quickpay == 1 %}
                 <li class="list-inline-item text-success">
-                        Quickpay Available
+                    Quickpay Available
                 </li>
                 {% else %}
                 <li class="list-inline-item text-danger">
-                        Quickpay Not Available
+                    Quickpay Not Available
                 </li>
                 {% endif %}
             </ul>
             <hr />
         </div>
     </div>
-    <div id="client-contact"> 
+    <div id="client-contact">
         <div>
             <ul class="list-inline d-flex justify-content-around">
                 <li class="list-inline-item">
@@ -50,24 +50,41 @@
                 </li>
             </ul>
         </div>
-    {% if current_client.quickpay == 1 %}
-    <div id="quickpay-info">
-        {% if current_client_quickpay is none %}
-        QuickPay Not Set Up
-        {% else %}
-        QuickPay Info
+        {% if current_client.quickpay == 1 %}
+        <div id="quickpay-info">
+            {% if current_client_quickpay is none %}
+            QuickPay Not Set Up
+            {% else %}
+            QuickPay Info
+            {% endif %}
+        </div>
         {% endif %}
-    </div>
-    {% endif %}
     </div>
     <div id="client-manage-buttons">
         <div class="btn btn-primary">Edit Client Info</div>
         {% if current_client.quickpay == 1 %}
-        <div class="btn btn-primary">Edit Quickpay Info</div>
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#AddQuickpayModal">Edit Quickpay Info</a>
         {% endif %}
         <div class="btn btn-danger">Delete Client</div>
 
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal" id="AddQuickpayModal" tabindex="-1" role="dialog" aria-labelledby="addQuickpayModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addQuickpaytModalLabel">Edit Quickpay Information</h5>
+            </div>
+
+            {% include 'dashboard/dash-add-quickpay.html' %}
+
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}
