@@ -1,0 +1,14 @@
+<div class="modal-body">
+    <div class="alert alert-danger">
+        <p>Are you sure you want to delete {{current_client.client_name}}?</p>
+        <p class="font-weight-bold m-0 p-0">This action is irreversible!</p>
+    </div>
+    <form method="POST" action="#">
+        {{ form3.hidden_tag() }}
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            {{ form3.submitDelete() }}
+    </form>
+</div>
+</div>

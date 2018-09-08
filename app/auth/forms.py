@@ -26,3 +26,17 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Email already in use.')
+
+class EditClientForm(FlaskForm):
+    client_name = StringField('Client Name')
+    email = StringField('Email', validators=[Email()])
+    phone = StringField('Phone')
+    fax = StringField('Fax')
+    address = StringField('Address')
+    city = StringField('City')
+    state = StringField('State')
+    country = StringField('Country')
+    mc_number = StringField('MC#')
+    dot_number = StringField('DOT#')
+    quickpay = StringField('Quickpay Available')
+    submit = SubmitField('Save Changes')

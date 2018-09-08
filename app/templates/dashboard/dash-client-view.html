@@ -50,24 +50,31 @@
                 </li>
             </ul>
         </div>
-        {% if current_client.quickpay == 1 %}
         <div id="quickpay-info">
             {% if current_client_quickpay is none %}
-            QuickPay Not Set Up
+            Quickpay not available
             {% else %}
-            QuickPay Info
+            {% include 'dashboard/dash-quickpay-view.html' %}
             {% endif %}
         </div>
-        {% endif %}
     </div>
     <div id="client-manage-buttons">
-        <div class="btn btn-primary">Edit Client Info</div>
-        {% if current_client.quickpay == 1 %}
-        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#AddQuickpayModal">Edit Quickpay Info</a>
-        {% endif %}
-        <div class="btn btn-danger">Delete Client</div>
+        <a href="#" id="editClientButton" class="btn btn-primary" data-toggle="modal" data-target="#editClientModal">
+            Edit Client Info
+        </a>
+        <a href="#" id="quickpayButton" class="btn btn-primary" data-toggle="modal" data-target="#AddQuickpayModal">
+            {% if current_client.quickpay == 1 %}
+            Edit Quickpay Info
+            {% else %}
+            Add Quickpay Info
+            {% endif %}
+        </a>
+        <a href="#" id="deleteClientBUtton" class="btn btn-danger" data-toggle="modal" data-target="#deleteClientModal">
+            Delete Client
+        </a>
 
     </div>
+
 </div>
 
 <!-- Modal -->
@@ -81,6 +88,31 @@
 
             {% include 'dashboard/dash-add-quickpay.html' %}
 
+        </div>
+    </div>
+</div>
+
+<!-- Edit Client Info Modal -->
+<div class="modal" id="editClientModal" tabindex="-1" role="dialog" aria-labelledby="editClientModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editClientModalLabel">Edit Client Info</h5>
+            </div>
+            {% include 'dashboard/dash-edit-client.html' %}
+        </div>
+    </div>
+</div>
+
+<!-- DElete Modal -->
+<div class="modal" id="deleteClientModal" tabindex="-1" role="dialog" aria-labelledby="deleteClientModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteClientModalLabel">Delete Client Info</h5>
+            </div>
+            {% include 'dashboard/dash-delete-client.html' %}
         </div>
     </div>
 </div>
