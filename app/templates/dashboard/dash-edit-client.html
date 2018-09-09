@@ -10,6 +10,20 @@
             {% endfor %}
         </p>
         <p>
+            {{ form.mc_number.label }}<br>
+            {{ form.mc_number(size=32) }}<br>
+            {% for error in form.mc_number.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.dot_number.label }}<br>
+            {{ form.dot_number(size=32) }}<br>
+            {% for error in form.dot_number.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </p>
+        <p>
             {{ form.email.label }}<br>
             {{ form.email(size=32) }}<br>
             {% for error in form.email.errors %}
@@ -59,7 +73,7 @@
             {% endfor %}
         </p>
         <p>
-            {{form.quickpay.label}}<br/>
+            {{form.quickpay.label}}<br />
             {{form.quickpay()}}
         </p>
         <div class="modal-footer">

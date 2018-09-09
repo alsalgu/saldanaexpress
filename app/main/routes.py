@@ -97,6 +97,10 @@ def singleClient(client_id):
             current_client.country = form.country.data
         if form.quickpay.data:
             current_client.quickpay = form.quickpay.data
+        if form.mc_number.data:
+            current_client.mc_number = form.mc_number.data
+        if form.dot_number.data:
+            current_client.dot_number = form.dot_number.data
         db.session.add(current_client)
         db.session.commit()
         flash('Client Updated!')
