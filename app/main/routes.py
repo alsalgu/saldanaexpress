@@ -106,3 +106,33 @@ def singleClient(client_id):
         flash('Client Updated!')
         return redirect(url_for('main.singleClient', client_id=current_client.id))  
     return render_template('dashboard/dash-client-view.html', current_client=current_client, current_client_quickpay = current_client_quickpay, form=form, form2=form2, form3=form3)
+
+@bp.route('/dashboard/employees')
+@login_required
+def employees():
+    return render_template('dashboard/employees/employees.html')
+
+@bp.route('/dashboard/expenses')
+@login_required
+def expenses():
+    return render_template('dashboard/expenses/expenses.html')
+
+@bp.route('/dashboard/invoices')
+@login_required
+def invoices():
+    return render_template('dashboard/invoices/invoices.html')
+
+@bp.route('/dashboard/company')
+@login_required
+def my_company():
+    return render_template('dashboard/my-company/company.html')
+
+@bp.route('/dashboard/trips')
+@login_required
+def trips():
+    return render_template('dashboard/trips/trips.html')
+
+@bp.route('/dashboard/trucks')
+@login_required
+def trucks():
+    return render_template('dashboard/trucks/trucks.html')
