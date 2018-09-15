@@ -11,6 +11,18 @@ from app.main.forms import EditClientForm, EditQuickpayForm, DeleteClient
 def index():
     return render_template('main/index.html')
 
+@bp.route('/about')
+def about():
+    return render_template('main/about.html')
+
+@bp.route('/careers')
+def careers():
+    return render_template('main/careers.html')
+
+@bp.route('/contact-us')
+def contact():
+    return render_template('main/contact.html')
+
 @bp.route('/dashboard')
 def dashboard_re():
     return redirect(url_for('main.dashboard'))
