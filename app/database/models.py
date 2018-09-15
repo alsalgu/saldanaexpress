@@ -8,6 +8,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     clients = db.relationship('Client', backref='user', lazy='dynamic')
+    employees = db.relationship('Employee', backref='user', lazy='dynamic')
+    trips = db.relationship('Trip', backref='user', lazy='dynamic')
+    trucks = db.relationship('Truck', backref='user', lazy='dynamic')
+    maintenance = db.relationship('Maintenance', backref='user', lazy='dynamic')
+    stops = db.relationship('Stops', backref='user', lazy='dynamic')
+    invoices = db.relationship('Invoice', backref='user', lazy='dynamic' )
+    diesel = db.relationship('Diesel', backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -54,6 +61,7 @@ class Client(db.Model):
 
 class Quickpay(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
     pay_percentage = db.Column(db.String(5))
     send_to = db.Column(db.String(120))
@@ -61,6 +69,7 @@ class Quickpay(db.Model):
 
 class Truck(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     VIN_number = db.Column(db.String(64))
     reg_number = db.Column(db.String(64))
     model = db.Column(db.String(64))
@@ -69,18 +78,21 @@ class Truck(db.Model):
 
 class  Maintenance(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     truck_id = db.Column(db.Integer, db.ForeignKey('truck.id'))
     price = db.Column(db.Float())
     desc = db.Column(db.Float())
 
 class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     em_firstname = db.Column(db.String(64))
     em_lastname = db.Column(db.String(64))
     trip_hist = db.relationship('Trip', backref='truck', lazy='dynamic')
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     truck_id = db.Column(db.Integer, db.ForeignKey('truck.id'))
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'))
     trip_diesel_hist = db.relationship('Diesel', backref='trip', lazy='dynamic')
@@ -89,6 +101,7 @@ class Trip(db.Model):
 
 class Diesel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     truck_id = db.Column(db.Integer, db.ForeignKey('truck.id'))
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
     price = db.Column(db.Float())
@@ -97,6 +110,7 @@ class Diesel(db.Model):
 
 class Stops(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
     origin_route = db.Column(db.String(64))
     origin_state = db.Column(db.String(2))
@@ -106,6 +120,7 @@ class Stops(db.Model):
 
 class Invoice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
     price_total = db.Column(db.Float())
