@@ -49,6 +49,8 @@ class Client(db.Model):
     quickpay = db.Column(db.String(1))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     quickpay_info = db.relationship('Quickpay', backref='client', lazy="dynamic")
+    trip_hist = db.relationship('Trip', backref='client', lazy='dynamic')
+    inv_hist = db.relationship('Invoice', backref='client', lazy='dynamic')
 
 class Quickpay(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,7 +59,54 @@ class Quickpay(db.Model):
     send_to = db.Column(db.String(120))
     send_to_type = db.Column(db.String(20))
 
+class Truck(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    VIN_number = db.Column(db.String(64))
+    reg_number = db.Column(db.String(64))
+    model = db.Column(db.String(64))
+    maintenance_hist = db.relationship('Maintenance', backref='truck', lazy="dynamic")
+    diesel_hist = db.relationship('Diesel', backref='truck', lazy='dynamic')
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+class  Maintenance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    truck_id = db.Column(db.Integer, db.ForeignKey('truck.id'))
+    price = db.Column(db.Float())
+    desc = db.Column(db.Float())
+
+class Employee(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    em_firstname = db.Column(db.String(64))
+    em_lastname = db.Column(db.String(64))
+    trip_hist = db.relationship('Trip', backref='truck', lazy='dynamic')
+
+class Trip(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    truck_id = db.Column(db.Integer, db.ForeignKey('truck.id'))
+    employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'))
+    trip_diesel_hist = db.relationship('Diesel', backref='trip', lazy='dynamic')
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
+    stops_hist = db.relationship('Stops', backref='trip', lazy='dynamic')
+
+class Diesel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    truck_id = db.Column(db.Integer, db.ForeignKey('truck.id'))
+    trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
+    price = db.Column(db.Float())
+    desc = db.Column(db.String(120))
+    gal = db.Column(db.Float())
+
+class Stops(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
+    origin_route = db.Column(db.String(64))
+    origin_state = db.Column(db.String(2))
+    dest_route = db.Column(db.String(64))
+    dest_state = db.Column(db.String(2))
+    mileage = db.Column(db.Float())
+
+class Invoice(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
+    price_total = db.Column(db.Float())
+    paid_toggle = db.Column(db.String(4))
