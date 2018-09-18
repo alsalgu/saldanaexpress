@@ -88,7 +88,8 @@ class Employee(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     em_firstname = db.Column(db.String(64))
     em_lastname = db.Column(db.String(64))
-    trip_hist = db.relationship('Trip', backref='truck', lazy='dynamic')
+    payroll_hist = db.relationship('Payroll', backref='employee', lazy='dynamic')
+    trip_hist = db.relationship('Trip', backref='employee', lazy='dynamic')
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -124,4 +125,11 @@ class Invoice(db.Model):
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
     price_total = db.Column(db.Float())
+    paid_toggle = db.Column(db.String(4))
+
+class Payroll(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'))
+    payment_total = db.Column(db.Float())
     paid_toggle = db.Column(db.String(4))
